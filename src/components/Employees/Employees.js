@@ -13,13 +13,21 @@ function Employees () {
 
   const addEmployeeHandler = useCallback((employee) => {
     setIsLoading(true)
-
-    /* const fd = new FormData()
-    fd.append('image', employee.profile_image, employee.profile_image.name)
+    /*
+    const fd = new FormData()
+    fd.append('profile_image', employee.profile_image, employee.profile_image.name)
     fd.set('employee_name', employee.employee_name)
     fd.set('employee_age', employee.employee_age)
     fd.set('employee_salary', employee.employee_salary)
-    const formHeaders = fd.getHeaders() */
+    const fileHeaders = {
+      'content-type': 'multipart/form-data',
+      'Accept': 'application/json',
+    }
+
+    console.log(...fd)
+    axios
+      .post('/api/employee', fd, fileHeaders)
+    */
     axios
       .post('/api/employee', employee)
       .then((response) => {
@@ -38,7 +46,8 @@ function Employees () {
         setError(error.message)
         setIsLoading(false)
       })
-  }, [])
+  }
+  , [])
 
   const getEmployeeHandler = useCallback((search) => {
     setIsLoading(true)
